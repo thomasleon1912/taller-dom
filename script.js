@@ -1,80 +1,40 @@
-const taskInput = document.getElementById("taskInput");
-const addBtn = document.getElementById("addBtn");
-const taskList = document.getElementById("taskList");
-const contador = document.getElementById("contador");
+const form = document.getElementById("contactForm");
+const contactList = document.getElementById("contactList");
 
-let pendientes = 0;
-let completadas = 0;
+form.addEventListener("submit", function (e) {
 
-function actualizarContador() {
-    contador.textContent =
-    `Tareas pendientes: ${pendientes} | Completadas: ${completadas}`;
-}
+    e.preventDefault();
 
-addBtn.addEventListener("click", () => {
+    const name = document.getElementById("name").value;
+    const lastname = document.getElementById("lastname").value;
+    const phone = document.getElementById("phone").value;
+    const city = document.getElementById("city").value;
+    const address = document.getElementById("address").value;
 
-    const texto = taskInput.value.trim();
+    const gender = document.querySelector(
+        'input[name="gender"]:checked'
+    ).value;
 
-    if(texto === ""){
-        alert("Ingrese una tarea");
-        return;
-    }
+    const contact = document.createElement("div");
 
-    const tarea = document.createElement("div");
-    tarea.classList.add("task");
+    contact.classList.add("contact");
 
-    const contenido = document.createElement("div");
-    contenido.classList.add("task-content");
+    contact.innerHTML = `
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Last Name:</strong> ${lastname}</p>
+        <p><strong>Phone:</strong> ${phone}</p>
+        <p><strong>City:</strong> ${city}</p>
+        <p><strong>Address:</strong> ${address}</p>
+        <p><strong>Gender:</strong> ${gender}</p>
+        <button class="delete-btn">Delete</button>
+    `;
 
-    const checkbox = document.createElement("input");
-    checkbox.type = "checkbox";
-
-    const textoTarea = document.createElement("span");
-    textoTarea.textContent = texto;
-
-    const btnEliminar = document.createElement("button");
-    btnEliminar.textContent = "🗑";
-    btnEliminar.classList.add("delete");
-
-    contenido.appendChild(checkbox);
-    contenido.appendChild(textoTarea);
-
-    tarea.appendChild(contenido);
-    tarea.appendChild(btnEliminar);
-
-    taskList.appendChild(tarea);
-
-    pendientes++;
-    actualizarContador();
-
-    taskInput.value = "";
-
-    checkbox.addEventListener("change", () => {
-
-        if(checkbox.checked){
-            textoTarea.classList.add("completed");
-            pendientes--;
-            completadas++;
-        }else{
-            textoTarea.classList.remove("completed");
-            pendientes++;
-            completadas--;
-        }
-
-        actualizarContador();
-
+    contact.querySelector(".delete-btn")
+    .addEventListener("click", () => {
+        contact.remove();
     });
 
-    btnEliminar.addEventListener("click", () => {
+    contactList.appendChild(contact);
 
-        if(checkbox.checked){
-            completadas--;
-        }else{
-            pendientes--;
-        }
-
-        tarea.remove();
-        actualizarContador();
-    });
-
+    form.reset();
 });

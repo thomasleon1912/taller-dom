@@ -1,31 +1,57 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>To Do List</title>
+    <title>Contact List</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
     <div class="container">
 
-        <h1>Javascript - To Do List</h1>
-
-        <div class="input-area">
-            <input type="text" id="taskInput" placeholder="Escriba aquí su tarea...">
-            <button id="addBtn">+</button>
+        <div class="icon">
+            📒
         </div>
 
-        <div id="taskList"></div>
+        <h1>Contact List</h1>
 
-        <p id="contador">
-            Tareas pendientes: 0 | Completadas: 0
-        </p>
+        <form id="contactForm">
+
+            <input type="text" id="name" placeholder="Name" required>
+
+            <input type="text" id="lastname" placeholder="Last Name" required>
+
+            <input type="tel" id="phone" placeholder="Phone" required>
+
+            <input type="text" id="city" placeholder="City" required>
+
+            <input type="text" id="address" placeholder="Address" required>
+
+            <div class="gender">
+                <label>
+                    <input type="radio" name="gender" value="Female" checked>
+                    Female
+                </label>
+
+                <label>
+                    <input type="radio" name="gender" value="Male">
+                    Male
+                </label>
+            </div>
+
+            <button type="submit">ADD</button>
+
+        </form>
+
+        <div id="contactList"></div>
 
     </div>
 
     <script src="script.js"></script>
 
 </body>
+
 </html>
